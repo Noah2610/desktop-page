@@ -64,7 +64,7 @@ function DateBlock() {
         " " +
         [
             pad(date.getDate()),
-            pad(date.getMonth()),
+            pad(date.getMonth() + 1),
             pad(date.getFullYear(), 4),
         ].join(":");
 
