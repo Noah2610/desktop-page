@@ -34,7 +34,7 @@ export default function TitleBar({
             window.removeEventListener("mouseup", setNoDrag);
             window.removeEventListener("mousemove", onMouseMove);
         };
-    }, [isDragging]);
+    }, [onMouseMove]);
 
     return (
         <Box

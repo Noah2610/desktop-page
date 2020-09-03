@@ -1,17 +1,11 @@
-import React, {
-    createRef,
-    forwardRef,
-    useState,
-    useRef,
-    useEffect,
-} from "react";
+import React, { createRef, forwardRef, useRef } from "react";
 import { WindowProps } from "..";
 import FullBox from "../../full-box";
-import { Box, Textarea as ChakraTextarea, InputProps } from "@chakra-ui/core";
+import { Textarea as ChakraTextarea, InputProps } from "@chakra-ui/core";
 
 export type Props = {} & WindowProps;
 
-export default function Notepad(props: Props) {
+export default function Notepad(_: Props) {
     const textareaRef = useRef<HTMLTextAreaElement>();
 
     return (

@@ -1,4 +1,4 @@
-import { WindowProps as WindowPropsImport, WindowComponent } from "../window";
+import { WindowProps as WindowPropsImport } from "../window";
 import ImageViewer from "./image-viewer";
 import Notepad from "./notepad";
 

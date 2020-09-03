@@ -26,7 +26,7 @@ export default function WindowResize({ resizeWindowRelative }: Props) {
             window.removeEventListener("mouseup", setNoDrag);
             window.removeEventListener("mousemove", onMouseMove);
         };
-    }, [isDragging]);
+    }, [onMouseMove]);
 
     return (
         <Box

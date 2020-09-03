@@ -31,7 +31,7 @@ export default function useWindow(windowId: WindowId): WindowState {
             setWindowActive,
             closeWindow,
         });
-    }, [windowContext]);
+    }, [windowContext, windowId]);
 
     return windowData;
 }

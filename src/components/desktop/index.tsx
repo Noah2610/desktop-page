@@ -1,6 +1,5 @@
 import { Box, BoxProps } from "@chakra-ui/core";
-import React, { useEffect } from "react";
-import windows from "../windows";
+import React from "react";
 import useWindows from "../../hooks/use-windows";
 import DesktopIcons from "./desktop-icons";
 

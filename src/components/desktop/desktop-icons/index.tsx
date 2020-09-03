@@ -4,9 +4,7 @@ import { Box, Image, Text, PseudoBox } from "@chakra-ui/core";
 import useWindows from "../../../hooks/use-windows";
 import windows from "../../windows";
 
-export interface Props {}
-
-export default function DesktopIcons(props: Props) {
+export default function DesktopIcons() {
     const PP_SRC =
         "https://www.gravatar.com/avatar/47480af5a86bc65864862f6b00d3d5d7";
 
