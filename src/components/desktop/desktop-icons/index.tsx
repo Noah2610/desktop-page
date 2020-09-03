@@ -1,7 +1,7 @@
+import { Box, Icon, Image, PseudoBox, Text } from "@chakra-ui/core";
 import React from "react";
-import FullBox from "../../full-box";
-import { Box, Image, Text, PseudoBox } from "@chakra-ui/core";
 import useWindows from "../../../hooks/use-windows";
+import FullBox from "../../full-box";
 import windows from "../../windows";
 
 export default function DesktopIcons() {
@@ -15,7 +15,7 @@ export default function DesktopIcons() {
             <Box display="flex" flexWrap="wrap">
                 <DesktopIconContainer
                     label="PP"
-                    img={PP_SRC}
+                    img={windows.ImageViewer.icon}
                     onClick={() =>
                         windowsApi.openWindow(
                             (props) => (
@@ -24,13 +24,13 @@ export default function DesktopIcons() {
                             {
                                 title: "PP - ImageViewer",
                                 initialSize: { w: 256, h: 256 },
-                            }
+                            },
                         )
                     }
                 />
                 <DesktopIconContainer
                     label="Notepad"
-                    img="https://images.fineartamerica.com/images-medium-large-5/notepad-icon-bismillahbd.jpg"
+                    img={windows.Notepad.icon}
                     onClick={() =>
                         windowsApi.openWindow(windows.Notepad, {
                             title: "Notepad",
@@ -44,7 +44,7 @@ export default function DesktopIcons() {
 
 interface DesktopIconContainerProps {
     label: string;
-    img: string;
+    img?: string;
     onClick?: () => void;
 }
 
@@ -71,7 +71,13 @@ function DesktopIconContainer({
                     fontWeight: "bold",
                 }}
             >
-                <Image width="100%" src={img} objectFit="contain" />
+                <Box width="desktopIcon" height="desktopIcon" mb="4px">
+                    {img ? (
+                        <Image src={img} objectFit="contain" size="100%" />
+                    ) : (
+                        <Icon name="question-outline" size="100%" />
+                    )}
+                </Box>
                 <Text
                     margin={0}
                     padding={0}

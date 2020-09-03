@@ -4,12 +4,14 @@ import WindowContainer, {
 } from "./window-container";
 
 export type WindowId = number;
-export type WindowProps = {
+export interface WindowProps {
     windowId: WindowId;
     position: { x: number; y: number };
     size: { w: number; h: number };
+}
+export type WindowComponent<P = {}> = React.FC<WindowProps & P> & {
+    icon?: string;
 };
-export type WindowComponent = React.FC<WindowProps>;
 export type WindowContainerProps = WindowContainerPropsImport;
 
 export { WindowContainer };

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { WindowProps } from "..";
 import { Image } from "@chakra-ui/core";
+import React, { useState } from "react";
 import FullBox from "../../full-box";
+import { WindowComponent, WindowProps } from "../../window";
 
 const ZOOM_STEP_PERCENT = 10;
 
@@ -9,7 +9,7 @@ export type Props = {
     src: string;
 } & WindowProps;
 
-export default function ImageViewer({ src, size }: Props) {
+const ImageViewer: WindowComponent<Props> = ({ src, size }) => {
     const [imgWidth, setImgWidth] = useState(size.w);
     const [imgOffset, setImgOffset] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
@@ -56,4 +56,9 @@ export default function ImageViewer({ src, size }: Props) {
             />
         </FullBox>
     );
-}
+};
+
+ImageViewer.icon =
+    "https://cdn1.iconfinder.com/data/icons/style-2-stock/807/Preview-01.png";
+
+export default ImageViewer;

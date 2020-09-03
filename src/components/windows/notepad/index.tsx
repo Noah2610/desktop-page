@@ -1,11 +1,11 @@
+import { InputProps, Textarea as ChakraTextarea } from "@chakra-ui/core";
 import React, { createRef, forwardRef, useRef } from "react";
-import { WindowProps } from "..";
 import FullBox from "../../full-box";
-import { Textarea as ChakraTextarea, InputProps } from "@chakra-ui/core";
+import { WindowComponent, WindowProps } from "../../window";
 
 export type Props = {} & WindowProps;
 
-export default function Notepad(_: Props) {
+const Notepad: WindowComponent = (_: Props) => {
     const textareaRef = useRef<HTMLTextAreaElement>();
 
     return (
@@ -14,7 +14,12 @@ export default function Notepad(_: Props) {
             <Textarea whiteSpace="pre" ref={textareaRef} />
         </FullBox>
     );
-}
+};
+
+Notepad.icon =
+    "https://images.fineartamerica.com/images-medium-large-5/notepad-icon-bismillahbd.jpg";
+
+export default Notepad;
 
 const Textarea = forwardRef((props: InputProps, ref: any) => (
     <ChakraTextarea
