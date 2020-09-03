@@ -2,7 +2,7 @@ import React from "react";
 import FullBox from "../../full-box";
 import { Box, Image, Text, PseudoBox } from "@chakra-ui/core";
 import useWindows from "../../../hooks/use-windows";
-import ImageViewer from "../../windows/image-viewer";
+import windows from "../../windows";
 
 export interface Props {}
 
@@ -20,12 +20,23 @@ export default function DesktopIcons(props: Props) {
                     img={PP_SRC}
                     onClick={() =>
                         windowsApi.openWindow(
-                            (props) => <ImageViewer src={PP_SRC} {...props} />,
+                            (props) => (
+                                <windows.ImageViewer src={PP_SRC} {...props} />
+                            ),
                             {
                                 title: "PP - ImageViewer",
                                 initialSize: { w: 256, h: 256 },
                             }
                         )
+                    }
+                />
+                <DesktopIconContainer
+                    label="Notepad"
+                    img="https://images.fineartamerica.com/images-medium-large-5/notepad-icon-bismillahbd.jpg"
+                    onClick={() =>
+                        windowsApi.openWindow(windows.Notepad, {
+                            title: "Notepad",
+                        })
                     }
                 />
             </Box>
@@ -62,12 +73,7 @@ function DesktopIconContainer({
                     fontWeight: "bold",
                 }}
             >
-                <Image
-                    width="100%"
-                    height="70%"
-                    src={img}
-                    objectFit="contain"
-                />
+                <Image width="100%" src={img} objectFit="contain" />
                 <Text
                     margin={0}
                     padding={0}

@@ -20,7 +20,7 @@ const theme = {
 
     sizes: {
         ...defaultTheme.sizes,
-        desktopIconWidth: "64px",
+        desktopIcon: "64px",
     },
 };
 
