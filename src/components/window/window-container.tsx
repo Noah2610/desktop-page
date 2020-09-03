@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import TitleBar from "./title-bar";
 import WindowResize from "./window-resize";
 import useWindow from "../../hooks/use-window";
+import { WindowId } from ".";
 
 const DEFAULT_POSITION = {
     x: 64,
@@ -22,16 +23,21 @@ const MAX_SIZE = {
 };
 const TITLE_BAR_HEIGHT = 24;
 
-export type Props = {
+export type WindowContainerProps = {
     title: string;
-    children: React.ReactNode;
     initialPosition?: { x: number; y: number };
     initialSize?: { w: number; h: number };
     isResizable?: boolean;
     hideTitlebar?: boolean;
+};
+
+type Props = WindowContainerProps & {
+    windowId: WindowId;
+    children: React.ReactNode;
 } & BoxProps;
 
 export default function WindowContainer({
+    windowId,
     title,
     children,
     initialPosition = DEFAULT_POSITION,
@@ -40,10 +46,7 @@ export default function WindowContainer({
     hideTitlebar = false,
     ...props
 }: Props) {
-    const {
-        isActive: isWindowActive,
-        setActive: setWindowActive,
-    } = useWindow();
+    const { isWindowActive, setWindowActive } = useWindow(windowId);
     const [position, setPosition] = useState({
         x: initialPosition.x,
         y: initialPosition.y,

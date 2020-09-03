@@ -1,40 +1,35 @@
 import { useContext, useState, useEffect } from "react";
-import ActiveWindowContext from "../contexts/active-window";
+import WindowContext from "../contexts/window-context";
 import { WindowId } from "../components/window";
 
-export interface WindowData {
-    windowId: WindowId;
-    isActive: boolean;
-    setActive: () => void;
+export interface WindowState {
+    isWindowActive: boolean;
+    setWindowActive: () => void;
+    closeWindow: () => void;
 }
 
 /**
- * Every window should use this hook.
- * This hook sets up a unique window ID for this window,
- * and also sets the appropriate window to active.
- * Returns the unique window ID for this window.
+ * Returns the window data for the given `WindowId`.
+ * Data includes window active state or API like `closeWindow`.
  */
-export default function useWindow(): WindowData {
-    const activeWindowContext = useContext(ActiveWindowContext);
-    const [windowData, setWindowData] = useState<WindowData>({
-        windowId: -1,
-        isActive: false,
-        setActive: () => {},
+export default function useWindow(windowId: WindowId): WindowState {
+    const activeWindowContext = useContext(WindowContext);
+    const [windowData, setWindowData] = useState<WindowState>({
+        isWindowActive: false,
+        setWindowActive: () => {},
+        closeWindow: () => {},
     });
 
     useEffect(() => {
-        const windowId =
-            windowData.windowId === -1
-                ? activeWindowContext.registerWindow()
-                : windowData.windowId;
-        const isActive = activeWindowContext.active === windowId;
-        const setActive = isActive
+        const isWindowActive = activeWindowContext.active === windowId;
+        const setWindowActive = isWindowActive
             ? () => {}
             : () => activeWindowContext.setActive(windowId);
+        const closeWindow = () => activeWindowContext.rmWindow(windowId);
         setWindowData({
-            windowId,
-            isActive,
-            setActive,
+            isWindowActive,
+            setWindowActive,
+            closeWindow,
         });
     }, [activeWindowContext]);
 

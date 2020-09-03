@@ -5,7 +5,7 @@ import Desktop from "./components/desktop";
 import StatusBar from "./components/status-bar";
 import theme from "./theme";
 import "./App.css";
-import { ActiveWindowProvider } from "./contexts/active-window";
+import { WindowContextProvider } from "./contexts/window-context";
 
 export default function App() {
     return (
@@ -16,7 +16,7 @@ export default function App() {
                     color: ${theme.colors.text};
                 }
             `}</style>
-            <ActiveWindowProvider>
+            <WindowContextProvider>
                 <Box
                     className="App"
                     position="absolute"
@@ -30,7 +30,7 @@ export default function App() {
                     <StatusBar height="22px" />
                     <Desktop top="22px" bottom="0" left="0" right="0" />
                 </Box>
-            </ActiveWindowProvider>
+            </WindowContextProvider>
         </ThemeProvider>
     );
 }

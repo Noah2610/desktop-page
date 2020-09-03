@@ -21,9 +21,25 @@ export default function ImageViewer({ src }: Props) {
     const setNoDrag = () => setIsDragging(false);
 
     return (
-        <WindowContainer
-            title="Image Viewer"
-            initialSize={initialWindowSize}
+        <FullBox
+            overflow="hidden"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            cursor={isDragging ? "grabbing" : "grab"}
+            onMouseDown={setDrag}
+            onMouseUp={setNoDrag}
+            onMouseLeave={setNoDrag}
+            onMouseMove={(e) => {
+                if (isDragging) {
+                    const x = e.movementX;
+                    const y = e.movementY;
+                    setImgOffset((prev) => ({
+                        x: prev.x + x,
+                        y: prev.y + y,
+                    }));
+                }
+            }}
             onWheel={(e) => {
                 const zoomDir = -Math.sign(e.deltaY);
                 setImgWidth((prev) => {
@@ -33,36 +49,15 @@ export default function ImageViewer({ src }: Props) {
                 });
             }}
         >
-            <FullBox
-                overflow="hidden"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                cursor={isDragging ? "grabbing" : "grab"}
-                onMouseDown={setDrag}
-                onMouseUp={setNoDrag}
-                onMouseLeave={setNoDrag}
-                onMouseMove={(e) => {
-                    if (isDragging) {
-                        const x = e.movementX;
-                        const y = e.movementY;
-                        setImgOffset((prev) => ({
-                            x: prev.x + x,
-                            y: prev.y + y,
-                        }));
-                    }
-                }}
-            >
-                <Image
-                    src={src}
-                    position="absolute"
-                    objectFit="contain"
-                    pointerEvents="none"
-                    width={`${imgWidth}px`}
-                    marginLeft={`${imgOffset.x}px`}
-                    marginTop={`${imgOffset.y}px`}
-                />
-            </FullBox>
-        </WindowContainer>
+            <Image
+                src={src}
+                position="absolute"
+                objectFit="contain"
+                pointerEvents="none"
+                width={`${imgWidth}px`}
+                marginLeft={`${imgOffset.x}px`}
+                marginTop={`${imgOffset.y}px`}
+            />
+        </FullBox>
     );
 }
