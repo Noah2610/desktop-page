@@ -16,8 +16,8 @@ export interface WindowContextData {
     windows: WindowData[];
     registerWindow: () => WindowId;
     setActive: (id: WindowId) => void;
-    addWindow: (data: WindowData) => void;
-    rmWindow: (id: WindowId) => void;
+    openWindow: (data: WindowData) => void;
+    closeWindow: (id: WindowId) => void;
 }
 
 const defaultWindowContextData: WindowContextData = {
@@ -25,8 +25,8 @@ const defaultWindowContextData: WindowContextData = {
     windows: [],
     registerWindow: () => -1,
     setActive: () => {},
-    addWindow: () => {},
-    rmWindow: () => {},
+    openWindow: () => {},
+    closeWindow: () => {},
 };
 const WindowContext = React.createContext<WindowContextData>(
     defaultWindowContextData
@@ -38,10 +38,21 @@ export function WindowContextProvider(props: { children: React.ReactNode }) {
     const nextWindowIdRef = useRef(-1);
     const [activeWindowId, setActiveWindowId] = useState<WindowId | null>(null);
     const [windows, setWindows] = useState<WindowData[]>([]);
-    const addWindow = (window: WindowData) =>
+    const openWindow = (window: WindowData) => {
         setWindows((prev) => [...prev, window]);
-    const rmWindow = (id: WindowId) =>
+        setActiveWindowId(window.windowId);
+    };
+    const closeWindow = (id: WindowId) => {
         setWindows((prev) => prev.filter((w) => w.windowId !== id));
+        const nextActiveWindow = windows.reduce(
+            (highest, w) =>
+                w.windowId !== id && w.windowId > highest
+                    ? w.windowId
+                    : highest,
+            -1
+        );
+        setActiveWindowId(nextActiveWindow);
+    };
     const registerWindow = () => ++nextWindowIdRef.current;
 
     const windowContext: WindowContextData = {
@@ -49,8 +60,8 @@ export function WindowContextProvider(props: { children: React.ReactNode }) {
         windows,
         registerWindow,
         setActive: setActiveWindowId,
-        addWindow,
-        rmWindow,
+        openWindow,
+        closeWindow,
     };
 
     return <WindowContext.Provider value={windowContext} {...props} />;

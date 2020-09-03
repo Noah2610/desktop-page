@@ -13,7 +13,7 @@ export interface WindowState {
  * Data includes window active state or API like `closeWindow`.
  */
 export default function useWindow(windowId: WindowId): WindowState {
-    const activeWindowContext = useContext(WindowContext);
+    const windowContext = useContext(WindowContext);
     const [windowData, setWindowData] = useState<WindowState>({
         isWindowActive: false,
         setWindowActive: () => {},
@@ -21,17 +21,17 @@ export default function useWindow(windowId: WindowId): WindowState {
     });
 
     useEffect(() => {
-        const isWindowActive = activeWindowContext.active === windowId;
+        const isWindowActive = windowContext.active === windowId;
         const setWindowActive = isWindowActive
             ? () => {}
-            : () => activeWindowContext.setActive(windowId);
-        const closeWindow = () => activeWindowContext.rmWindow(windowId);
+            : () => windowContext.setActive(windowId);
+        const closeWindow = () => windowContext.closeWindow(windowId);
         setWindowData({
             isWindowActive,
             setWindowActive,
             closeWindow,
         });
-    }, [activeWindowContext]);
+    }, [windowContext]);
 
     return windowData;
 }

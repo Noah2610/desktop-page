@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { WindowContainer } from "..";
+import { WindowProps } from "..";
 import { Image } from "@chakra-ui/core";
 import FullBox from "../../full-box";
 
 const ZOOM_STEP_PERCENT = 10;
 
-export interface Props {
+export type Props = {
     src: string;
-}
+} & WindowProps;
 
 export default function ImageViewer({ src }: Props) {
     const initialWindowSize = {

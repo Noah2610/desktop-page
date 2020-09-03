@@ -5,11 +5,13 @@ import Buttons from "./buttons";
 export type Props = {
     children: string;
     moveWindowRelative?: (x: number, y: number) => void;
+    onClose?: () => void;
 } & BoxProps;
 
 export default function TitleBar({
     children,
     moveWindowRelative,
+    onClose,
     ...props
 }: Props) {
     const [isDragging, setIsDragging] = useState(false);
@@ -60,7 +62,7 @@ export default function TitleBar({
                 {children}
             </Heading>
 
-            <Buttons />
+            <Buttons onClose={onClose} />
         </Box>
     );
 }

@@ -1,7 +1,6 @@
 import { Box, BoxProps } from "@chakra-ui/core";
 import React, { useEffect } from "react";
-import allWindows from "../windows";
-import { WindowContainer } from "../window";
+import windows from "../windows";
 import useWindows from "../../hooks/use-windows";
 
 export type Props = {} | BoxProps;
@@ -10,15 +9,24 @@ export default function Desktop(props: Props) {
     const IMG_SRC =
         "https://www.gravatar.com/avatar/47480af5a86bc65864862f6b00d3d5d7";
 
-    const windows = useWindows();
+    const windowsApi = useWindows();
 
     useEffect(() => {
-        windows.addWindow(() => <allWindows.ImageViewer src={IMG_SRC} />, {
-            title: "Image Viewer 1",
-        });
-        windows.addWindow(() => <allWindows.ImageViewer src={IMG_SRC} />, {
-            title: "Image Viewer 2",
-        });
+        windowsApi.openWindow(
+            (props) => <windows.ImageViewer src={IMG_SRC} {...props} />,
+            {
+                title: "Image Viewer 1",
+                initialSize: { w: 512, h: 512 },
+            }
+        );
+        windowsApi.openWindow(
+            (props) => <windows.ImageViewer src={IMG_SRC} {...props} />,
+            {
+                title: "Image Viewer 2",
+                initialPosition: { x: 80, y: 80 },
+                initialSize: { w: 512, h: 512 },
+            }
+        );
     }, []);
 
     return (
@@ -29,7 +37,7 @@ export default function Desktop(props: Props) {
             overflow="hidden"
             {...props}
         >
-            {windows.render()}
+            {windowsApi.render()}
         </Box>
     );
 }

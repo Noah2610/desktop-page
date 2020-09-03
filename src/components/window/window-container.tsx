@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import TitleBar from "./title-bar";
 import WindowResize from "./window-resize";
 import useWindow from "../../hooks/use-window";
-import { WindowId } from ".";
+import { WindowId, WindowComponent } from ".";
 
 const DEFAULT_POSITION = {
     x: 64,
@@ -33,20 +33,22 @@ export type WindowContainerProps = {
 
 type Props = WindowContainerProps & {
     windowId: WindowId;
-    children: React.ReactNode;
+    window: WindowComponent;
 } & BoxProps;
 
 export default function WindowContainer({
     windowId,
+    window: WindowBody,
     title,
-    children,
     initialPosition = DEFAULT_POSITION,
     initialSize = DEFAULT_SIZE,
     isResizable = true,
     hideTitlebar = false,
     ...props
 }: Props) {
-    const { isWindowActive, setWindowActive } = useWindow(windowId);
+    const { isWindowActive, setWindowActive, closeWindow } = useWindow(
+        windowId
+    );
     const [position, setPosition] = useState({
         x: initialPosition.x,
         y: initialPosition.y,
@@ -83,6 +85,7 @@ export default function WindowContainer({
                 <TitleBar
                     moveWindowRelative={moveWindowRelative}
                     height={`${TITLE_BAR_HEIGHT}px`}
+                    onClose={closeWindow}
                 >
                     {title}
                 </TitleBar>
@@ -98,7 +101,11 @@ export default function WindowContainer({
                 zIndex={-1}
                 backgroundColor="bg"
             >
-                {children}
+                <WindowBody
+                    windowId={windowId}
+                    position={position}
+                    size={size}
+                />
             </Box>
 
             {isResizable && (

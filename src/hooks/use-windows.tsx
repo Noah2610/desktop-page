@@ -7,7 +7,7 @@ import {
 } from "../components/window";
 
 export interface WindowsData {
-    addWindow: (
+    openWindow: (
         Component: WindowComponent,
         props: WindowContainerProps
     ) => void;
@@ -21,12 +21,12 @@ export default function useWindows(): WindowsData {
     const windowContext = useContext(WindowContext);
 
     const windowsData: WindowsData = {
-        addWindow: (
+        openWindow: (
             Component: WindowComponent,
             containerProps: WindowContainerProps
         ) => {
             const windowId = windowContext.registerWindow();
-            windowContext.addWindow({
+            windowContext.openWindow({
                 windowId,
                 Component,
                 containerProps: { ...containerProps },
@@ -39,9 +39,8 @@ export default function useWindows(): WindowsData {
                         key={windowId}
                         windowId={windowId}
                         {...containerProps}
-                    >
-                        <Component />
-                    </WindowContainer>
+                        window={Component}
+                    />
                 )
             ),
     };

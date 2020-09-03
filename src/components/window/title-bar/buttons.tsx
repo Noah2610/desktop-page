@@ -1,17 +1,17 @@
 import { Box, BoxProps, Button, Icon } from "@chakra-ui/core";
 import React from "react";
 
-export type Props = {} | BoxProps;
+export type Props = { onClose?: () => void } & BoxProps;
 
-export default function WindowButtons(props: Props) {
+export default function WindowButtons({ onClose, ...props }: Props) {
     return (
         <Box position="relative" height="100%" {...props}>
-            <CloseButton />
+            <CloseButton onClick={onClose} />
         </Box>
     );
 }
 
-function CloseButton() {
+function CloseButton({ onClick }: { onClick?: () => void }) {
     return (
         <Button
             height="100%"
@@ -23,6 +23,7 @@ function CloseButton() {
             cursor="pointer"
             variantColor="red"
             title="Close"
+            onClick={onClick}
         >
             <Icon name="close" height="100%" />
         </Button>
