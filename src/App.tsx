@@ -1,10 +1,10 @@
 import { ThemeProvider } from "@chakra-ui/core";
 import { Box } from "@chakra-ui/core";
 import React from "react";
-import "./App.css";
-
+import Desktop from "./components/desktop";
 import StatusBar from "./components/status-bar";
 import theme from "./theme";
+import "./App.css";
 
 export default function App() {
     return (
@@ -25,7 +25,8 @@ export default function App() {
                 backgroundColor="bg"
                 color="text"
             >
-                <StatusBar />
+                <StatusBar height="22px" />
+                <Desktop top="22px" bottom="0" left="0" right="0" />
             </Box>
         </ThemeProvider>
     );

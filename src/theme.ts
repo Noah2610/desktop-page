@@ -5,8 +5,11 @@ const theme = {
     ...defaultTheme,
     colors: {
         ...defaultTheme.colors,
-        bg: "#000000",
+        bg: "#222222",
         text: "#B6BDCA",
+        windowBorder: "#ffffff",
+        windowTitleBarBg: "#000000",
+        windowTitleBarText: "#ffffff",
     },
 };
 
