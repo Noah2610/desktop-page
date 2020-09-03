@@ -9,12 +9,8 @@ export type Props = {
     src: string;
 } & WindowProps;
 
-export default function ImageViewer({ src }: Props) {
-    const initialWindowSize = {
-        w: 512,
-        h: 512,
-    };
-    const [imgWidth, setImgWidth] = useState(initialWindowSize.w);
+export default function ImageViewer({ src, size }: Props) {
+    const [imgWidth, setImgWidth] = useState(size.w);
     const [imgOffset, setImgOffset] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
     const setDrag = () => setIsDragging(true);

@@ -17,6 +17,11 @@ const theme = {
         windowActive: "4px 4px 24px 4px",
         windowInactive: "4px 4px 16px 0px",
     },
+
+    sizes: {
+        ...defaultTheme.sizes,
+        desktopIconWidth: "64px",
+    },
 };
 
 export default theme;
