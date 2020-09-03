@@ -11,7 +11,7 @@ export default function Notepad(_: Props) {
     return (
         <FullBox display="flex" justifyContent="flex-start" alignItems="start">
             <TextLineNumbers textareaRef={textareaRef} />
-            <Textarea whiteSpace="nowrap" ref={textareaRef} />
+            <Textarea whiteSpace="pre" ref={textareaRef} />
         </FullBox>
     );
 }

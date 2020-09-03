@@ -71,7 +71,7 @@ export default function WindowContainer({
             position="absolute"
             top={`${position.y}px`}
             left={`${position.x}px`}
-            outline="1px solid"
+            border="1px solid"
             color="windowBorder"
             width={`${size.w}px`}
             height={`${size.h + TITLE_BAR_HEIGHT}px`}

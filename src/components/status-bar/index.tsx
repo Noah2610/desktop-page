@@ -8,7 +8,11 @@ export type Props = {} | BoxProps;
 export default function StatusBar(props: Props) {
     return (
         <Box position="relative" border="1px solid" {...props}>
-            <Flex justifyContent="space-between" alignItems="center">
+            <Flex
+                justifyContent="space-between"
+                alignItems="center"
+                height="100%"
+            >
                 <OpenWindows />
                 <Blocks />
             </Flex>
