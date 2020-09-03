@@ -17,18 +17,7 @@ export default function Desktop(props: Props) {
             {...props}
         >
             <windows.ImageViewer src={IMG_SRC} />
+            <windows.ImageViewer src={IMG_SRC} />
         </Box>
-    );
-}
-
-function ExampleWindow() {
-    return (
-        <WindowContainer
-            title="Example Window"
-            initialPosition={{ x: 10, y: 10 }}
-            initialSize={{ w: 256, h: 128 }}
-        >
-            Hello Window!
-        </WindowContainer>
     );
 }

@@ -11,6 +11,12 @@ const theme = {
         windowTitleBarBg: "#000000",
         windowTitleBarText: "#ffffff",
     },
+
+    shadows: {
+        ...defaultTheme.shadows,
+        windowActive: "4px 4px 24px 4px",
+        windowInactive: "4px 4px 16px 0px",
+    },
 };
 
 export default theme;

@@ -2,6 +2,7 @@ import { Box, BoxProps } from "@chakra-ui/core";
 import React, { useState } from "react";
 import TitleBar from "./title-bar";
 import WindowResize from "./window-resize";
+import useWindow from "../../hooks/use-window";
 
 const DEFAULT_POSITION = {
     x: 64,
@@ -39,6 +40,10 @@ export default function WindowContainer({
     hideTitlebar = false,
     ...props
 }: Props) {
+    const {
+        isActive: isWindowActive,
+        setActive: setWindowActive,
+    } = useWindow();
     const [position, setPosition] = useState({
         x: initialPosition.x,
         y: initialPosition.y,
@@ -65,7 +70,10 @@ export default function WindowContainer({
             color="windowBorder"
             width={`${size.w}px`}
             height={`${size.h + TITLE_BAR_HEIGHT}px`}
-            zIndex={1}
+            boxShadow={isWindowActive ? "windowActive" : "windowInactive"}
+            zIndex={isWindowActive ? 1 : 0}
+            opacity={isWindowActive ? 1.0 : 0.5}
+            onMouseDown={setWindowActive}
             {...props}
         >
             {!hideTitlebar && (
@@ -85,6 +93,7 @@ export default function WindowContainer({
                 margin={0}
                 padding={0}
                 zIndex={-1}
+                backgroundColor="bg"
             >
                 {children}
             </Box>

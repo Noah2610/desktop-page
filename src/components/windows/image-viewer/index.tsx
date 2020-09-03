@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { WindowContainer } from "..";
-import { Box, Image } from "@chakra-ui/core";
+import { Image } from "@chakra-ui/core";
 import FullBox from "../../full-box";
 
 const ZOOM_STEP_PERCENT = 10;
