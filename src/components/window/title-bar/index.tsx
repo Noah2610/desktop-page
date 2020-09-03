@@ -16,7 +16,6 @@ export default function TitleBar({ children, moveWindowRelative }: Props) {
               if (isDragging) {
                   const x = e.movementX;
                   const y = e.movementY;
-                  console.log(x, y);
                   moveWindowRelative(x, y);
               }
           }
