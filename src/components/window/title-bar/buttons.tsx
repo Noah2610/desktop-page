@@ -5,7 +5,7 @@ export type Props = {} | BoxProps;
 
 export default function WindowButtons(props: Props) {
     return (
-        <Box {...props}>
+        <Box position="relative" height="100%" {...props}>
             <CloseButton />
         </Box>
     );
@@ -14,7 +14,9 @@ export default function WindowButtons(props: Props) {
 function CloseButton() {
     return (
         <Button
+            height="100%"
             size="sm"
+            padding={0}
             color="red"
             border="none"
             borderRadius={0}
@@ -22,7 +24,7 @@ function CloseButton() {
             variantColor="red"
             title="Close"
         >
-            <Icon name="close" />
+            <Icon name="close" height="100%" />
         </Button>
     );
 }

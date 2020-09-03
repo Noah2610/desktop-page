@@ -1,10 +1,13 @@
 import { Box, BoxProps } from "@chakra-ui/core";
 import React from "react";
 import WindowContainer from "../window/window-container";
+import windows from "../windows";
 
 export type Props = {} | BoxProps;
 
 export default function Desktop(props: Props) {
+    const IMG_SRC =
+        "https://www.gravatar.com/avatar/47480af5a86bc65864862f6b00d3d5d7";
     return (
         <Box
             position="absolute"
@@ -13,7 +16,7 @@ export default function Desktop(props: Props) {
             overflow="hidden"
             {...props}
         >
-            <ExampleWindow />
+            <windows.ImageViewer src={IMG_SRC} />
         </Box>
     );
 }

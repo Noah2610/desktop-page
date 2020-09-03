@@ -1,13 +1,17 @@
-import { Box, Heading } from "@chakra-ui/core";
+import { Box, BoxProps, Heading } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 import Buttons from "./buttons";
 
-export interface Props {
+export type Props = {
     children: string;
     moveWindowRelative?: (x: number, y: number) => void;
-}
+} & BoxProps;
 
-export default function TitleBar({ children, moveWindowRelative }: Props) {
+export default function TitleBar({
+    children,
+    moveWindowRelative,
+    ...props
+}: Props) {
     const [isDragging, setIsDragging] = useState(false);
     const setDrag = () => setIsDragging(true);
     const setNoDrag = () => setIsDragging(false);
@@ -43,6 +47,7 @@ export default function TitleBar({ children, moveWindowRelative }: Props) {
             borderColor="windowBorder"
             onMouseDown={setDrag}
             cursor={isDragging ? "grabbing" : "grab"}
+            {...props}
         >
             <Heading
                 size="sm"
@@ -50,6 +55,7 @@ export default function TitleBar({ children, moveWindowRelative }: Props) {
                 fontWeight="normal"
                 margin={0}
                 padding={2}
+                pointerEvents="none"
             >
                 {children}
             </Heading>

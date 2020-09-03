@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box, BoxProps } from "@chakra-ui/core";
 import React, { useState } from "react";
 import TitleBar from "./title-bar";
 import WindowResize from "./window-resize";
@@ -19,15 +19,16 @@ const MAX_SIZE = {
     w: 1280,
     h: 720,
 };
+const TITLE_BAR_HEIGHT = 24;
 
-export interface Props {
+export type Props = {
     title: string;
     children: React.ReactNode;
     initialPosition?: { x: number; y: number };
     initialSize?: { w: number; h: number };
     isResizable?: boolean;
     hideTitlebar?: boolean;
-}
+} & BoxProps;
 
 export default function WindowContainer({
     title,
@@ -36,6 +37,7 @@ export default function WindowContainer({
     initialSize = DEFAULT_SIZE,
     isResizable = true,
     hideTitlebar = false,
+    ...props
 }: Props) {
     const [position, setPosition] = useState({
         x: initialPosition.x,
@@ -62,15 +64,28 @@ export default function WindowContainer({
             outline="1px solid"
             color="windowBorder"
             width={`${size.w}px`}
-            height={`${size.h}px`}
+            height={`${size.h + TITLE_BAR_HEIGHT}px`}
+            zIndex={1}
+            {...props}
         >
             {!hideTitlebar && (
-                <TitleBar moveWindowRelative={moveWindowRelative}>
+                <TitleBar
+                    moveWindowRelative={moveWindowRelative}
+                    height={`${TITLE_BAR_HEIGHT}px`}
+                >
                     {title}
                 </TitleBar>
             )}
 
-            <Box padding={2} color="text">
+            <Box
+                position="relative"
+                width={`${size.w}px`}
+                height={`${size.h}px`}
+                color="text"
+                margin={0}
+                padding={0}
+                zIndex={-1}
+            >
                 {children}
             </Box>
 
