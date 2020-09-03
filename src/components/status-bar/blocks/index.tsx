@@ -1,9 +1,16 @@
-import { Box, BoxProps } from "@chakra-ui/core";
+import { Box, Flex, BoxProps } from "@chakra-ui/core";
 import React from "react";
 import DateBlock from "./date-block";
 import TimeBlock from "./time-block";
 
-export { TimeBlock, DateBlock };
+export default function Blocks() {
+    return (
+        <Flex justifyContent="flex-end" alignItems="center">
+            <DateBlock />
+            <TimeBlock />
+        </Flex>
+    );
+}
 
 export function Block({
     children,
