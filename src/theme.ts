@@ -14,8 +14,8 @@ const theme = {
 
     shadows: {
         ...defaultTheme.shadows,
-        windowActive: "4px 4px 24px 4px",
-        windowInactive: "4px 4px 16px 0px",
+        windowActive: "0px 0px 24px 4px",
+        windowInactive: "0px 0px 16px 0px",
     },
 
     sizes: {
